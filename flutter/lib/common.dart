@@ -3261,21 +3261,21 @@ Color? disabledTextColor(BuildContext context, bool enabled) {
 Widget loadPowered(BuildContext context) {
   return MouseRegion(
     cursor: SystemMouseCursors.click,
-    // child: GestureDetector(
-    //   onTap: () {
-    //     launchUrl(Uri.parse('https://rustdesk.com'));
-    //   },
-    //   child: Opacity(
-    //       opacity: 0.5,
-    //       child: Text(
-    //         translate("powered_by_me"),
-    //         overflow: TextOverflow.clip,
-    //         style: Theme.of(context)
-    //             .textTheme
-    //             .bodySmall
-    //             ?.copyWith(fontSize: 9, decoration: TextDecoration.underline),
-    //       )),
-    // ),
+    child: GestureDetector(
+      onTap: () {
+        launchUrl(Uri.parse('https://rustdesk.com'));
+      },
+      child: Opacity(
+          opacity: 0.5,
+          child: Text(
+            translate("powered_by_me"),
+            overflow: TextOverflow.clip,
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(fontSize: 9, decoration: TextDecoration.underline),
+          )),
+    ),
   ).marginOnly(top: 6);
 }
 
