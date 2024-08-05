@@ -66,7 +66,7 @@ class _DropDownAction extends StatelessWidget {
             PopupMenuItem(
               value: 'AcceptSessionsViaPassword',
               child: listTile(
-                  'Accept sessions via password', approveMode == 'password'),
+                  'Accept sessions via password', approveMode == 'password'&& approveMode != 'click'),
               enabled: !isApproveModeFixed,
             ),
             PopupMenuItem(
@@ -78,7 +78,7 @@ class _DropDownAction extends StatelessWidget {
             PopupMenuItem(
               value: "AcceptSessionsViaBoth",
               child: listTile("Accept sessions via both",
-                  approveMode != 'password' && approveMode != 'click'),
+                  approveMode != 'password' ),
               enabled: !isApproveModeFixed,
             ),
             if (showPasswordOption) const PopupMenuDivider(),
@@ -105,15 +105,18 @@ class _DropDownAction extends StatelessWidget {
               PopupMenuItem(
                 value: kUsePermanentPassword,
                 child: listTile('Use permanent password',
-                    verificationMethod == kUsePermanentPassword),
+                    // verificationMethod == kUsePermanentPassword),
+                    verificationMethod != kUseTemporaryPassword &&
+                    verificationMethod != kUsePermanentPassword),
               ),
             if (showPasswordOption)
               PopupMenuItem(
                 value: kUseBothPasswords,
                 child: listTile(
                     'Use both passwords',
-                    verificationMethod != kUseTemporaryPassword &&
-                        verificationMethod != kUsePermanentPassword),
+                    // verificationMethod != kUseTemporaryPassword &&
+                    //     verificationMethod != kUsePermanentPassword),
+                    verificationMethod == kUsePermanentPassword),
               ),
           ];
         },
