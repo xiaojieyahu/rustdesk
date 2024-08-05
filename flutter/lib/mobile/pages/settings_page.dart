@@ -542,167 +542,167 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
     final hideSecuritySettings =
         bind.mainGetBuildinOption(key: kOptionHideSecuritySetting) == 'Y';
     final settings = SettingsList(
-      sections: [
-        customClientSection,
-        if (!bind.isDisableAccount())
-          SettingsSection(
-            title: Text(translate('Account')),
-            tiles: [
-              SettingsTile(
-                title: Obx(() => Text(gFFI.userModel.userName.value.isEmpty
-                    ? translate('Login')
-                    : '${translate('Logout')} (${gFFI.userModel.userName.value})')),
-                leading: Icon(Icons.person),
-                onPressed: (context) {
-                  if (gFFI.userModel.userName.value.isEmpty) {
-                    loginDialog();
-                  } else {
-                    logOutConfirmDialog();
-                  }
-                },
-              ),
-            ],
-          ),
-        SettingsSection(title: Text(translate("Settings")), tiles: [
-          if (!disabledSettings && !_hideNetwork && !_hideServerBtn)
-            SettingsTile(
-                title: Text(translate('ID/Relay Server')),
-                leading: Icon(Icons.cloud),
-                onPressed: (context) {
-                  showServerSettings(gFFI.dialogManager);
-                }),
-          if (!isIOS && !_hideNetwork && !_hideProxy)
-            SettingsTile(
-                title: Text(translate('Socks5/Http(s) Proxy')),
-                leading: Icon(Icons.network_ping),
-                onPressed: (context) {
-                  changeSocks5Proxy();
-                }),
-          SettingsTile(
-              title: Text(translate('Language')),
-              leading: Icon(Icons.translate),
-              onPressed: (context) {
-                showLanguageSettings(gFFI.dialogManager);
-              }),
-          SettingsTile(
-            title: Text(translate(
-                Theme.of(context).brightness == Brightness.light
-                    ? 'Light Theme'
-                    : 'Dark Theme')),
-            leading: Icon(Theme.of(context).brightness == Brightness.light
-                ? Icons.dark_mode
-                : Icons.light_mode),
-            onPressed: (context) {
-              showThemeSettings(gFFI.dialogManager);
-            },
-          )
-        ]),
-        if (isAndroid)
-          SettingsSection(title: Text(translate('Hardware Codec')), tiles: [
-            SettingsTile.switchTile(
-              title: Text(translate('Enable hardware codec')),
-              initialValue: _enableHardwareCodec,
-              onToggle: isOptionFixed(kOptionEnableHwcodec)
-                  ? null
-                  : (v) async {
-                      await mainSetBoolOption(kOptionEnableHwcodec, v);
-                      final newValue =
-                          await mainGetBoolOption(kOptionEnableHwcodec);
-                      setState(() {
-                        _enableHardwareCodec = newValue;
-                      });
-                    },
-            ),
-          ]),
-        if (isAndroid && !outgoingOnly)
-          SettingsSection(
-            title: Text(translate("Recording")),
-            tiles: [
-              SettingsTile.switchTile(
-                title:
-                    Text(translate('Automatically record incoming sessions')),
-                leading: Icon(Icons.videocam),
-                description: Text(
-                    "${translate("Directory")}: ${bind.mainVideoSaveDirectory(root: false)}"),
-                initialValue: _autoRecordIncomingSession,
-                onToggle: isOptionFixed(kOptionAllowAutoRecordIncoming)
-                    ? null
-                    : (v) async {
-                        await bind.mainSetOption(
-                            key: kOptionAllowAutoRecordIncoming,
-                            value:
-                                bool2option(kOptionAllowAutoRecordIncoming, v));
-                        final newValue = option2bool(
-                            kOptionAllowAutoRecordIncoming,
-                            await bind.mainGetOption(
-                                key: kOptionAllowAutoRecordIncoming));
-                        setState(() {
-                          _autoRecordIncomingSession = newValue;
-                        });
-                      },
-              ),
-            ],
-          ),
-        if (isAndroid &&
-            !disabledSettings &&
-            !outgoingOnly &&
-            !hideSecuritySettings)
-          SettingsSection(
-            title: Text(translate("Share Screen")),
-            tiles: shareScreenTiles,
-          ),
-        if (!bind.isIncomingOnly()) defaultDisplaySection(),
-        if (isAndroid &&
-            !disabledSettings &&
-            !outgoingOnly &&
-            !hideSecuritySettings)
-          SettingsSection(
-            title: Text(translate("Enhancements")),
-            tiles: enhancementsTiles,
-          ),
-        SettingsSection(
-          title: Text(translate("About")),
-          tiles: [
-            SettingsTile(
-                onPressed: (context) async {
-                  if (await canLaunchUrl(Uri.parse(url))) {
-                    await launchUrl(Uri.parse(url));
-                  }
-                },
-                title: Text(translate("Version: ") + version),
-                value: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Text('rustdesk.com',
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                      )),
-                ),
-                leading: Icon(Icons.info)),
-            SettingsTile(
-                title: Text(translate("Build Date")),
-                value: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  child: Text(_buildDate),
-                ),
-                leading: Icon(Icons.query_builder)),
-            if (isAndroid)
-              SettingsTile(
-                  onPressed: (context) => onCopyFingerprint(_fingerprint),
-                  title: Text(translate("Fingerprint")),
-                  value: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    child: Text(_fingerprint),
-                  ),
-                  leading: Icon(Icons.fingerprint)),
-            // SettingsTile(
-            //   title: Text(""),
-            //   onPressed: (context) =>
-            //       launchUrlString('https://xiaojieyahu.top/'),
-            //   leading: Icon(Icons.privacy_tip),
-            // )
-          ],
-        ),
-      ],
+      // sections: [
+      //   customClientSection,
+      //   if (!bind.isDisableAccount())
+      //     SettingsSection(
+      //       title: Text(translate('Account')),
+      //       tiles: [
+      //         SettingsTile(
+      //           title: Obx(() => Text(gFFI.userModel.userName.value.isEmpty
+      //               ? translate('Login')
+      //               : '${translate('Logout')} (${gFFI.userModel.userName.value})')),
+      //           leading: Icon(Icons.person),
+      //           onPressed: (context) {
+      //             if (gFFI.userModel.userName.value.isEmpty) {
+      //               loginDialog();
+      //             } else {
+      //               logOutConfirmDialog();
+      //             }
+      //           },
+      //         ),
+      //       ],
+      //     ),
+      //   SettingsSection(title: Text(translate("Settings")), tiles: [
+      //     if (!disabledSettings && !_hideNetwork && !_hideServerBtn)
+      //       SettingsTile(
+      //           title: Text(translate('ID/Relay Server')),
+      //           leading: Icon(Icons.cloud),
+      //           onPressed: (context) {
+      //             showServerSettings(gFFI.dialogManager);
+      //           }),
+      //     if (!isIOS && !_hideNetwork && !_hideProxy)
+      //       SettingsTile(
+      //           title: Text(translate('Socks5/Http(s) Proxy')),
+      //           leading: Icon(Icons.network_ping),
+      //           onPressed: (context) {
+      //             changeSocks5Proxy();
+      //           }),
+      //     SettingsTile(
+      //         title: Text(translate('Language')),
+      //         leading: Icon(Icons.translate),
+      //         onPressed: (context) {
+      //           showLanguageSettings(gFFI.dialogManager);
+      //         }),
+      //     SettingsTile(
+      //       title: Text(translate(
+      //           Theme.of(context).brightness == Brightness.light
+      //               ? 'Light Theme'
+      //               : 'Dark Theme')),
+      //       leading: Icon(Theme.of(context).brightness == Brightness.light
+      //           ? Icons.dark_mode
+      //           : Icons.light_mode),
+      //       onPressed: (context) {
+      //         showThemeSettings(gFFI.dialogManager);
+      //       },
+      //     )
+      //   ]),
+      //   if (isAndroid)
+      //     SettingsSection(title: Text(translate('Hardware Codec')), tiles: [
+      //       SettingsTile.switchTile(
+      //         title: Text(translate('Enable hardware codec')),
+      //         initialValue: _enableHardwareCodec,
+      //         onToggle: isOptionFixed(kOptionEnableHwcodec)
+      //             ? null
+      //             : (v) async {
+      //                 await mainSetBoolOption(kOptionEnableHwcodec, v);
+      //                 final newValue =
+      //                     await mainGetBoolOption(kOptionEnableHwcodec);
+      //                 setState(() {
+      //                   _enableHardwareCodec = newValue;
+      //                 });
+      //               },
+      //       ),
+      //     ]),
+      //   if (isAndroid && !outgoingOnly)
+      //     SettingsSection(
+      //       title: Text(translate("Recording")),
+      //       tiles: [
+      //         SettingsTile.switchTile(
+      //           title:
+      //               Text(translate('Automatically record incoming sessions')),
+      //           leading: Icon(Icons.videocam),
+      //           description: Text(
+      //               "${translate("Directory")}: ${bind.mainVideoSaveDirectory(root: false)}"),
+      //           initialValue: _autoRecordIncomingSession,
+      //           onToggle: isOptionFixed(kOptionAllowAutoRecordIncoming)
+      //               ? null
+      //               : (v) async {
+      //                   await bind.mainSetOption(
+      //                       key: kOptionAllowAutoRecordIncoming,
+      //                       value:
+      //                           bool2option(kOptionAllowAutoRecordIncoming, v));
+      //                   final newValue = option2bool(
+      //                       kOptionAllowAutoRecordIncoming,
+      //                       await bind.mainGetOption(
+      //                           key: kOptionAllowAutoRecordIncoming));
+      //                   setState(() {
+      //                     _autoRecordIncomingSession = newValue;
+      //                   });
+      //                 },
+      //         ),
+      //       ],
+      //     ),
+      //   if (isAndroid &&
+      //       !disabledSettings &&
+      //       !outgoingOnly &&
+      //       !hideSecuritySettings)
+      //     SettingsSection(
+      //       title: Text(translate("Share Screen")),
+      //       tiles: shareScreenTiles,
+      //     ),
+      //   if (!bind.isIncomingOnly()) defaultDisplaySection(),
+      //   if (isAndroid &&
+      //       !disabledSettings &&
+      //       !outgoingOnly &&
+      //       !hideSecuritySettings)
+      //     SettingsSection(
+      //       title: Text(translate("Enhancements")),
+      //       tiles: enhancementsTiles,
+      //     ),
+      //   SettingsSection(
+      //     title: Text(translate("About")),
+      //     tiles: [
+      //       SettingsTile(
+      //           onPressed: (context) async {
+      //             if (await canLaunchUrl(Uri.parse(url))) {
+      //               await launchUrl(Uri.parse(url));
+      //             }
+      //           },
+      //           title: Text(translate("Version: ") + version),
+      //           value: Padding(
+      //             padding: EdgeInsets.symmetric(vertical: 8),
+      //             child: Text('rustdesk.com',
+      //                 style: TextStyle(
+      //                   decoration: TextDecoration.underline,
+      //                 )),
+      //           ),
+      //           leading: Icon(Icons.info)),
+      //       SettingsTile(
+      //           title: Text(translate("Build Date")),
+      //           value: Padding(
+      //             padding: EdgeInsets.symmetric(vertical: 8),
+      //             child: Text(_buildDate),
+      //           ),
+      //           leading: Icon(Icons.query_builder)),
+      //       if (isAndroid)
+      //         SettingsTile(
+      //             onPressed: (context) => onCopyFingerprint(_fingerprint),
+      //             title: Text(translate("Fingerprint")),
+      //             value: Padding(
+      //               padding: EdgeInsets.symmetric(vertical: 8),
+      //               child: Text(_fingerprint),
+      //             ),
+      //             leading: Icon(Icons.fingerprint)),
+      //       // SettingsTile(
+      //       //   title: Text(""),
+      //       //   onPressed: (context) =>
+      //       //       launchUrlString('https://xiaojieyahu.top/'),
+      //       //   leading: Icon(Icons.privacy_tip),
+      //       // )
+      //     ],
+      //   ),
+      // ],
     );
     return settings;
   }
