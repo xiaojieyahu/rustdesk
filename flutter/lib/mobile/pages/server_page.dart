@@ -65,12 +65,10 @@ class _DropDownAction extends StatelessWidget {
             const PopupMenuDivider(),
             PopupMenuItem(
               value: 'AcceptSessionsViaPassword',
-              // child: listTile(
-              //     'Accept sessions via password', approveMode == 'password'&& approveMode != 'click'),
-              // enabled: !isApproveModeFixed,
-              child: listTile("Accept sessions via password",
-                  approveMode != 'password' ),
+              child: listTile(
+                  'Accept sessions via password', approveMode != 'password'),
               enabled: !isApproveModeFixed,
+
             ),
             PopupMenuItem(
               value: 'AcceptSessionsViaClick',
@@ -80,10 +78,8 @@ class _DropDownAction extends StatelessWidget {
             ),
             PopupMenuItem(
               value: "AcceptSessionsViaBoth",
-              // child: listTile("Accept sessions via both",
-              //     approveMode != 'password' ),
-              // enabled: !isApproveModeFixed,
-              listTile('Accept sessions via both', approveMode == 'click'),
+              child: listTile("Accept sessions via both",
+                  approveMode == 'password' ),
               enabled: !isApproveModeFixed,
             ),
             if (showPasswordOption) const PopupMenuDivider(),
