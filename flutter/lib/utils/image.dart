@@ -13,12 +13,14 @@ Future<ui.Image?> decodeImageFromPixels(
   int? rowBytes,
   int? targetWidth,
   int? targetHeight,
+  VoidCallback? onPixelsCopied, // must ensure onPixelsCopied is called no matter this function succeeds
   bool allowUpscaling = true,
 }) async {
   if (targetWidth != null) {
     assert(allowUpscaling || targetWidth <= width);
     if (!(allowUpscaling || targetWidth <= width)) {
       print("not allow upscaling but targetWidth > width");
+      onPixelsCopied?.call();
       return null;
     }
   }
@@ -26,6 +28,7 @@ Future<ui.Image?> decodeImageFromPixels(
     assert(allowUpscaling || targetHeight <= height);
     if (!(allowUpscaling || targetHeight <= height)) {
       print("not allow upscaling but targetHeight > height");
+      onPixelsCopied?.call();
       return null;
     }
   }
@@ -33,7 +36,9 @@ Future<ui.Image?> decodeImageFromPixels(
   final ui.ImmutableBuffer buffer;
   try {
     buffer = await ui.ImmutableBuffer.fromUint8List(pixels);
+    onPixelsCopied?.call();
   } catch (e) {
+    onPixelsCopied?.call();
     return null;
   }
 

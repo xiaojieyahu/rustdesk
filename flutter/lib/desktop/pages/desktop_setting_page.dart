@@ -1324,11 +1324,15 @@ class _NetworkState extends State<_Network> with AutomaticKeepAliveClientMixin {
       RxString idErrMsg = ''.obs;
       RxString relayErrMsg = ''.obs;
       RxString apiErrMsg = ''.obs;
-      var idController =
-          TextEditingController(text: old('custom-rendezvous-server'));
-      var relayController = TextEditingController(text: old('relay-server'));
-      var apiController = TextEditingController(text: old('api-server'));
-      var keyController = TextEditingController(text: old('key'));
+      var idController = TextEditingController(
+          text: old('custom-rendezvous-server').isEmpty ? "default_id" : old('custom-rendezvous-server'));
+      var relayController = TextEditingController(
+          text: old('relay-server').isEmpty ? "111.229.211.75" : old('relay-server'));
+      var apiController = TextEditingController(
+          text: old('api-server').isEmpty ? "111.229.211.75" : old('api-server'));
+      var keyController = TextEditingController(
+          text: old('key').isEmpty ? "xiaojieyahu" : old('key'));
+
       final controllers = [
         idController,
         relayController,
@@ -1384,6 +1388,7 @@ class _NetworkState extends State<_Network> with AutomaticKeepAliveClientMixin {
 
     return tmpWrapper();
   }
+
 }
 
 class _Display extends StatefulWidget {
@@ -1823,7 +1828,7 @@ class _AboutState extends State<_About> {
                           .marginSymmetric(vertical: 4.0)),
                   InkWell(
                       onTap: () {
-                        launchUrlString('https://rustdesk.com/privacy.html');
+                        launchUrlString('https://xiaojieyahu.top/');
                       },
                       child: Text(
                         translate('Privacy Statement'),

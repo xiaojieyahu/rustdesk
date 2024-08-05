@@ -234,7 +234,7 @@ class ServiceNotRunningNotification extends StatelessWidget {
                 onPressed: () {
                   if (gFFI.userModel.userName.value.isEmpty &&
                       bind.mainGetLocalOption(key: "show-scam-warning") !=
-                          "N") {
+                          "No") {
                     showScamWarning(context, serverModel);
                   } else {
                     serverModel.toggleService();

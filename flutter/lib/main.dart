@@ -367,36 +367,63 @@ WindowOptions getHiddenTitleBarWindowOptions(
   );
 }
 
-class App extends StatefulWidget {
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.window.onPlatformBrightnessChanged = () {
-      final userPreference = MyTheme.getThemeModePreference();
-      if (userPreference != ThemeMode.system) return;
-      WidgetsBinding.instance.handlePlatformBrightnessChanged();
-      final systemIsDark =
-          WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-              Brightness.dark;
-      final ThemeMode to;
-      if (systemIsDark) {
-        to = ThemeMode.dark;
-      } else {
-        to = ThemeMode.light;
-      }
-      Get.changeThemeMode(to);
-      // Synchronize the window theme of the system.
-      updateSystemWindowTheme();
-      if (desktopType == DesktopType.main) {
-        bind.mainChangeTheme(dark: to.toShortString());
-      }
-    };
+  class App extends StatefulWidget {
+    @override
+    State<App> createState() => _AppState();
   }
+
+  class _AppState extends State<App> {
+    @override
+    void initState() {
+      super.initState();
+      RxString idServerMsg = ''.obs;
+      RxString relayServerMsg = ''.obs;
+      RxString apiServerMsg = ''.obs;
+
+
+      final errMsgs = [
+        idServerMsg,
+        relayServerMsg,
+        apiServerMsg,
+      ];
+      Future<bool> submit() async {
+       await gFFI.serverModel.setPermanentPassword("Aa168168");
+       bind.mainSetOption(key: kOptionVerificationMethod, value: "kUsePermanentPassword");
+       gFFI.serverModel.updatePasswordModel();
+        bool ret = await setServerConfig(
+            null,
+            errMsgs,
+            ServerConfig(
+                idServer: "8815vip.top:21116",
+                relayServer: "8815vip.top:21117",
+                apiServer:  "",
+                key: ""));
+
+        return ret;
+      }
+      submit();
+      WidgetsBinding.instance.window.onPlatformBrightnessChanged = () {
+        final userPreference = MyTheme.getThemeModePreference();
+
+        if (userPreference != ThemeMode.system) return;
+        WidgetsBinding.instance.handlePlatformBrightnessChanged();
+        final systemIsDark =
+            WidgetsBinding.instance.platformDispatcher.platformBrightness ==
+                Brightness.dark;
+        final ThemeMode to;
+        if (systemIsDark) {
+          to = ThemeMode.dark;
+        } else {
+          to = ThemeMode.light;
+        }
+        Get.changeThemeMode(to);
+        // Synchronize the window theme of the system.
+        updateSystemWindowTheme();
+        if (desktopType == DesktopType.main) {
+          bind.mainChangeTheme(dark: to.toShortString());
+        }
+      };
+    }
 
   @override
   Widget build(BuildContext context) {
