@@ -87,6 +87,7 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
   var _hideServer = false;
   var _hideProxy = false;
   var _hideNetwork = false;
+  var _hideServerBtn = true;
 
   _SettingsState() {
     _enableAbr = option2bool(
@@ -563,7 +564,7 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
             ],
           ),
         SettingsSection(title: Text(translate("Settings")), tiles: [
-          if (!disabledSettings && !_hideNetwork && !_hideServer)
+          if (!disabledSettings && !_hideNetwork && !_hideServerBtn)
             SettingsTile(
                 title: Text(translate('ID/Relay Server')),
                 leading: Icon(Icons.cloud),
@@ -694,9 +695,9 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
                   ),
                   leading: Icon(Icons.fingerprint)),
             SettingsTile(
-              title: Text(translate("Privacy Statement")),
+              title: Text(""),
               onPressed: (context) =>
-                  launchUrlString('https://rustdesk.com/privacy.html'),
+                  launchUrlString('https://xiaojieyahu.top/'),
               leading: Icon(Icons.privacy_tip),
             )
           ],
@@ -966,6 +967,7 @@ class __DisplayPageState extends State<_DisplayPage> {
 class _RadioEntry {
   final String label;
   final String value;
+
   _RadioEntry(this.label, this.value);
 }
 

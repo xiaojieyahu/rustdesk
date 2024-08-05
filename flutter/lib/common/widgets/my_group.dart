@@ -30,8 +30,6 @@ class _MyGroupState extends State<MyGroup> {
         return Center(
             child: ElevatedButton(
                 onPressed: loginDialog, child: Text(translate("Login"))));
-      } else if (gFFI.userModel.networkError.isNotEmpty) {
-        return netWorkErrorWidget();
       } else if (gFFI.groupModel.groupLoading.value && gFFI.groupModel.emtpy) {
         return const Center(
           child: CircularProgressIndicator(),

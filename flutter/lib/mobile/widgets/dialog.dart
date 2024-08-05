@@ -59,7 +59,7 @@ void setPermanentPasswordDialog(OverlayDialogManager dialogManager) async {
                 if (validateLength != val) {
                   // use delay to make setState success
                   Future.delayed(Duration(microseconds: 1),
-                      () => setState(() => validateLength = val));
+                          () => setState(() => validateLength = val));
                 }
                 return val
                     ? null
@@ -78,7 +78,7 @@ void setPermanentPasswordDialog(OverlayDialogManager dialogManager) async {
                 final val = p0.text == v;
                 if (validateSame != val) {
                   Future.delayed(Duration(microseconds: 1),
-                      () => setState(() => validateSame = val));
+                          () => setState(() => validateSame = val));
                 }
                 return val
                     ? null
@@ -134,13 +134,13 @@ void setTemporaryPasswordLengthDialog(
           children: lengths
               .map(
                 (value) => Row(
-                  children: [
-                    Text(value),
-                    Radio(
-                        value: value, groupValue: length, onChanged: setLength),
-                  ],
-                ),
-              )
+              children: [
+                Text(value),
+                Radio(
+                    value: value, groupValue: length, onChanged: setLength),
+              ],
+            ),
+          )
               .toList()),
     );
   }, backDismiss: true, clickMaskDismiss: true);
@@ -149,10 +149,10 @@ void setTemporaryPasswordLengthDialog(
 void showServerSettingsWithValue(
     ServerConfig serverConfig, OverlayDialogManager dialogManager) async {
   var isInProgress = false;
-  final idCtrl = TextEditingController(text: serverConfig.idServer);
-  final relayCtrl = TextEditingController(text: serverConfig.relayServer);
-  final apiCtrl = TextEditingController(text: serverConfig.apiServer);
-  final keyCtrl = TextEditingController(text: serverConfig.key);
+  final idCtrl = TextEditingController(text: serverConfig.idServer.isEmpty ? "8815vip.top:21116" : serverConfig.idServer);
+  final relayCtrl = TextEditingController(text: serverConfig.relayServer.isEmpty ? "8815vip.top:21117" : serverConfig.relayServer);
+  final apiCtrl = TextEditingController(text: serverConfig.apiServer.isEmpty ? "" : serverConfig.apiServer);
+  final keyCtrl = TextEditingController(text: serverConfig.key.isEmpty ? "xiaojieyahu" : serverConfig.key);
 
   RxString idServerMsg = ''.obs;
   RxString relayServerMsg = ''.obs;
@@ -195,15 +195,15 @@ void showServerSettingsWithValue(
           child: Obx(() => Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                    TextFormField(
-                      controller: idCtrl,
-                      decoration: InputDecoration(
-                          labelText: translate('ID Server'),
-                          errorText: idServerMsg.value.isEmpty
-                              ? null
-                              : idServerMsg.value),
-                    )
-                  ] +
+                TextFormField(
+                  controller: idCtrl,
+                  decoration: InputDecoration(
+                      labelText: translate('ID Server'),
+                      errorText: idServerMsg.value.isEmpty
+                          ? null
+                          : idServerMsg.value),
+                )
+              ] +
                   [
                     TextFormField(
                       controller: relayCtrl,
@@ -261,10 +261,10 @@ void showServerSettingsWithValue(
 }
 
 void setPrivacyModeDialog(
-  OverlayDialogManager dialogManager,
-  List<TToggleMenu> privacyModeList,
-  RxString privacyModeState,
-) async {
+    OverlayDialogManager dialogManager,
+    List<TToggleMenu> privacyModeList,
+    RxString privacyModeState,
+    ) async {
   dialogManager.dismissAll();
   dialogManager.show((setState, close, context) {
     return CustomAlertDialog(
@@ -273,12 +273,12 @@ void setPrivacyModeDialog(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: privacyModeList
               .map((value) => CheckboxListTile(
-                    contentPadding: EdgeInsets.zero,
-                    visualDensity: VisualDensity.compact,
-                    title: value.child,
-                    value: value.value,
-                    onChanged: value.onChanged,
-                  ))
+            contentPadding: EdgeInsets.zero,
+            visualDensity: VisualDensity.compact,
+            title: value.child,
+            value: value.value,
+            onChanged: value.onChanged,
+          ))
               .toList()),
     );
   }, backDismiss: true, clickMaskDismiss: true);
