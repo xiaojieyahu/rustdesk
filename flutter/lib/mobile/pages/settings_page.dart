@@ -694,12 +694,12 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
                     child: Text(_fingerprint),
                   ),
                   leading: Icon(Icons.fingerprint)),
-            SettingsTile(
-              title: Text(""),
-              onPressed: (context) =>
-                  launchUrlString('https://xiaojieyahu.top/'),
-              leading: Icon(Icons.privacy_tip),
-            )
+            // SettingsTile(
+            //   title: Text(""),
+            //   onPressed: (context) =>
+            //       launchUrlString('https://xiaojieyahu.top/'),
+            //   leading: Icon(Icons.privacy_tip),
+            // )
           ],
         ),
       ],
