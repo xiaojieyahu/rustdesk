@@ -245,177 +245,177 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
     ));
     final List<AbstractSettingsTile> enhancementsTiles = [];
     final List<AbstractSettingsTile> shareScreenTiles = [
-      SettingsTile.switchTile(
-        title: Text(translate('enable-2fa-title')),
-        initialValue: bind.mainHasValid2FaSync(),
-        onToggle: (_) async {
-          update() async {
-            setState(() {});
-          }
-
-          change2fa(callback: update);
-        },
-      ),
-      SettingsTile.switchTile(
-        title: Text(translate('Deny LAN discovery')),
-        initialValue: _denyLANDiscovery,
-        onToggle: isOptionFixed(kOptionEnableLanDiscovery)
-            ? null
-            : (v) async {
-                await bind.mainSetOption(
-                    key: kOptionEnableLanDiscovery,
-                    value: bool2option(kOptionEnableLanDiscovery, !v));
-                final newValue = !option2bool(kOptionEnableLanDiscovery,
-                    await bind.mainGetOption(key: kOptionEnableLanDiscovery));
-                setState(() {
-                  _denyLANDiscovery = newValue;
-                });
-              },
-      ),
-      SettingsTile.switchTile(
-        title: Row(children: [
-          Expanded(child: Text(translate('Use IP Whitelisting'))),
-          Offstage(
-                  offstage: !_onlyWhiteList,
-                  child: const Icon(Icons.warning_amber_rounded,
-                      color: Color.fromARGB(255, 255, 204, 0)))
-              .marginOnly(left: 5)
-        ]),
-        initialValue: _onlyWhiteList,
-        onToggle: (_) async {
-          update() async {
-            final onlyWhiteList = whitelistNotEmpty();
-            if (onlyWhiteList != _onlyWhiteList) {
-              setState(() {
-                _onlyWhiteList = onlyWhiteList;
-              });
-            }
-          }
-
-          changeWhiteList(callback: update);
-        },
-      ),
-      SettingsTile.switchTile(
-        title: Text('${translate('Adaptive bitrate')} (beta)'),
-        initialValue: _enableAbr,
-        onToggle: isOptionFixed(kOptionEnableAbr)
-            ? null
-            : (v) async {
-                await mainSetBoolOption(kOptionEnableAbr, v);
-                final newValue = await mainGetBoolOption(kOptionEnableAbr);
-                setState(() {
-                  _enableAbr = newValue;
-                });
-              },
-      ),
-      SettingsTile.switchTile(
-        title: Text(translate('Enable recording session')),
-        initialValue: _enableRecordSession,
-        onToggle: isOptionFixed(kOptionEnableRecordSession)
-            ? null
-            : (v) async {
-                await mainSetBoolOption(kOptionEnableRecordSession, v);
-                final newValue =
-                    await mainGetBoolOption(kOptionEnableRecordSession);
-                setState(() {
-                  _enableRecordSession = newValue;
-                });
-              },
-      ),
-      SettingsTile.switchTile(
-        title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    Text(translate("Direct IP Access")),
-                    Offstage(
-                        offstage: !_enableDirectIPAccess,
-                        child: Text(
-                          '${translate("Local Address")}: $_localIP${_directAccessPort.isEmpty ? "" : ":$_directAccessPort"}',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        )),
-                  ])),
-              Offstage(
-                  offstage: !_enableDirectIPAccess,
-                  child: IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: Icon(
-                        Icons.edit,
-                        size: 20,
-                      ),
-                      onPressed: isOptionFixed(kOptionDirectAccessPort)
-                          ? null
-                          : () async {
-                              final port = await changeDirectAccessPort(
-                                  _localIP, _directAccessPort);
-                              setState(() {
-                                _directAccessPort = port;
-                              });
-                            }))
-            ]),
-        initialValue: _enableDirectIPAccess,
-        onToggle: isOptionFixed(kOptionDirectServer)
-            ? null
-            : (_) async {
-                _enableDirectIPAccess = !_enableDirectIPAccess;
-                String value =
-                    bool2option(kOptionDirectServer, _enableDirectIPAccess);
-                await bind.mainSetOption(
-                    key: kOptionDirectServer, value: value);
-                setState(() {});
-              },
-      ),
-      SettingsTile.switchTile(
-        title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                    Text(translate("auto_disconnect_option_tip")),
-                    Offstage(
-                        offstage: !_allowAutoDisconnect,
-                        child: Text(
-                          '${_autoDisconnectTimeout.isEmpty ? '10' : _autoDisconnectTimeout} min',
-                          style: Theme.of(context).textTheme.bodySmall,
-                        )),
-                  ])),
-              Offstage(
-                  offstage: !_allowAutoDisconnect,
-                  child: IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: Icon(
-                        Icons.edit,
-                        size: 20,
-                      ),
-                      onPressed: isOptionFixed(kOptionAutoDisconnectTimeout)
-                          ? null
-                          : () async {
-                              final timeout = await changeAutoDisconnectTimeout(
-                                  _autoDisconnectTimeout);
-                              setState(() {
-                                _autoDisconnectTimeout = timeout;
-                              });
-                            }))
-            ]),
-        initialValue: _allowAutoDisconnect,
-        onToggle: isOptionFixed(kOptionAllowAutoDisconnect)
-            ? null
-            : (_) async {
-                _allowAutoDisconnect = !_allowAutoDisconnect;
-                String value = bool2option(
-                    kOptionAllowAutoDisconnect, _allowAutoDisconnect);
-                await bind.mainSetOption(
-                    key: kOptionAllowAutoDisconnect, value: value);
-                setState(() {});
-              },
-      )
+      // SettingsTile.switchTile(
+      //   title: Text(translate('enable-2fa-title')),
+      //   initialValue: bind.mainHasValid2FaSync(),
+      //   onToggle: (_) async {
+      //     update() async {
+      //       setState(() {});
+      //     }
+      //
+      //     change2fa(callback: update);
+      //   },
+      // ),
+      // SettingsTile.switchTile(
+      //   title: Text(translate('Deny LAN discovery')),
+      //   initialValue: _denyLANDiscovery,
+      //   onToggle: isOptionFixed(kOptionEnableLanDiscovery)
+      //       ? null
+      //       : (v) async {
+      //           await bind.mainSetOption(
+      //               key: kOptionEnableLanDiscovery,
+      //               value: bool2option(kOptionEnableLanDiscovery, !v));
+      //           final newValue = !option2bool(kOptionEnableLanDiscovery,
+      //               await bind.mainGetOption(key: kOptionEnableLanDiscovery));
+      //           setState(() {
+      //             _denyLANDiscovery = newValue;
+      //           });
+      //         },
+      // ),
+      // SettingsTile.switchTile(
+      //   title: Row(children: [
+      //     Expanded(child: Text(translate('Use IP Whitelisting'))),
+      //     Offstage(
+      //             offstage: !_onlyWhiteList,
+      //             child: const Icon(Icons.warning_amber_rounded,
+      //                 color: Color.fromARGB(255, 255, 204, 0)))
+      //         .marginOnly(left: 5)
+      //   ]),
+      //   initialValue: _onlyWhiteList,
+      //   onToggle: (_) async {
+      //     update() async {
+      //       final onlyWhiteList = whitelistNotEmpty();
+      //       if (onlyWhiteList != _onlyWhiteList) {
+      //         setState(() {
+      //           _onlyWhiteList = onlyWhiteList;
+      //         });
+      //       }
+      //     }
+      //
+      //     changeWhiteList(callback: update);
+      //   },
+      // ),
+      // SettingsTile.switchTile(
+      //   title: Text('${translate('Adaptive bitrate')} (beta)'),
+      //   initialValue: _enableAbr,
+      //   onToggle: isOptionFixed(kOptionEnableAbr)
+      //       ? null
+      //       : (v) async {
+      //           await mainSetBoolOption(kOptionEnableAbr, v);
+      //           final newValue = await mainGetBoolOption(kOptionEnableAbr);
+      //           setState(() {
+      //             _enableAbr = newValue;
+      //           });
+      //         },
+      // ),
+      // SettingsTile.switchTile(
+      //   title: Text(translate('Enable recording session')),
+      //   initialValue: _enableRecordSession,
+      //   onToggle: isOptionFixed(kOptionEnableRecordSession)
+      //       ? null
+      //       : (v) async {
+      //           await mainSetBoolOption(kOptionEnableRecordSession, v);
+      //           final newValue =
+      //               await mainGetBoolOption(kOptionEnableRecordSession);
+      //           setState(() {
+      //             _enableRecordSession = newValue;
+      //           });
+      //         },
+      // ),
+      // SettingsTile.switchTile(
+      //   title: Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //       crossAxisAlignment: CrossAxisAlignment.center,
+      //       children: [
+      //         Expanded(
+      //             child: Column(
+      //                 crossAxisAlignment: CrossAxisAlignment.start,
+      //                 children: [
+      //               Text(translate("Direct IP Access")),
+      //               Offstage(
+      //                   offstage: !_enableDirectIPAccess,
+      //                   child: Text(
+      //                     '${translate("Local Address")}: $_localIP${_directAccessPort.isEmpty ? "" : ":$_directAccessPort"}',
+      //                     style: Theme.of(context).textTheme.bodySmall,
+      //                   )),
+      //             ])),
+      //         Offstage(
+      //             offstage: !_enableDirectIPAccess,
+      //             child: IconButton(
+      //                 padding: EdgeInsets.zero,
+      //                 icon: Icon(
+      //                   Icons.edit,
+      //                   size: 20,
+      //                 ),
+      //                 onPressed: isOptionFixed(kOptionDirectAccessPort)
+      //                     ? null
+      //                     : () async {
+      //                         final port = await changeDirectAccessPort(
+      //                             _localIP, _directAccessPort);
+      //                         setState(() {
+      //                           _directAccessPort = port;
+      //                         });
+      //                       }))
+      //       ]),
+      //   initialValue: _enableDirectIPAccess,
+      //   onToggle: isOptionFixed(kOptionDirectServer)
+      //       ? null
+      //       : (_) async {
+      //           _enableDirectIPAccess = !_enableDirectIPAccess;
+      //           String value =
+      //               bool2option(kOptionDirectServer, _enableDirectIPAccess);
+      //           await bind.mainSetOption(
+      //               key: kOptionDirectServer, value: value);
+      //           setState(() {});
+      //         },
+      // ),
+      // SettingsTile.switchTile(
+      //   title: Row(
+      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //       crossAxisAlignment: CrossAxisAlignment.center,
+      //       children: [
+      //         Expanded(
+      //             child: Column(
+      //                 crossAxisAlignment: CrossAxisAlignment.start,
+      //                 children: [
+      //               Text(translate("auto_disconnect_option_tip")),
+      //               Offstage(
+      //                   offstage: !_allowAutoDisconnect,
+      //                   child: Text(
+      //                     '${_autoDisconnectTimeout.isEmpty ? '10' : _autoDisconnectTimeout} min',
+      //                     style: Theme.of(context).textTheme.bodySmall,
+      //                   )),
+      //             ])),
+      //         Offstage(
+      //             offstage: !_allowAutoDisconnect,
+      //             child: IconButton(
+      //                 padding: EdgeInsets.zero,
+      //                 icon: Icon(
+      //                   Icons.edit,
+      //                   size: 20,
+      //                 ),
+      //                 onPressed: isOptionFixed(kOptionAutoDisconnectTimeout)
+      //                     ? null
+      //                     : () async {
+      //                         final timeout = await changeAutoDisconnectTimeout(
+      //                             _autoDisconnectTimeout);
+      //                         setState(() {
+      //                           _autoDisconnectTimeout = timeout;
+      //                         });
+      //                       }))
+      //       ]),
+      //   initialValue: _allowAutoDisconnect,
+      //   onToggle: isOptionFixed(kOptionAllowAutoDisconnect)
+      //       ? null
+      //       : (_) async {
+      //           _allowAutoDisconnect = !_allowAutoDisconnect;
+      //           String value = bool2option(
+      //               kOptionAllowAutoDisconnect, _allowAutoDisconnect);
+      //           await bind.mainSetOption(
+      //               key: kOptionAllowAutoDisconnect, value: value);
+      //           setState(() {});
+      //         },
+      // )
     ];
     if (_hasIgnoreBattery) {
       enhancementsTiles.insert(
@@ -544,113 +544,113 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
     final settings = SettingsList(
       sections: [
         customClientSection,
-        if (!bind.isDisableAccount())
-          SettingsSection(
-            title: Text(translate('Account')),
-            tiles: [
-              SettingsTile(
-                title: Obx(() => Text(gFFI.userModel.userName.value.isEmpty
-                    ? translate('Login')
-                    : '${translate('Logout')} (${gFFI.userModel.userName.value})')),
-                leading: Icon(Icons.person),
-                onPressed: (context) {
-                  if (gFFI.userModel.userName.value.isEmpty) {
-                    loginDialog();
-                  } else {
-                    logOutConfirmDialog();
-                  }
-                },
-              ),
-            ],
-          ),
+        // if (!bind.isDisableAccount())
+        //   SettingsSection(
+        //     title: Text(translate('Account')),
+        //     tiles: [
+        //       SettingsTile(
+        //         title: Obx(() => Text(gFFI.userModel.userName.value.isEmpty
+        //             ? translate('Login')
+        //             : '${translate('Logout')} (${gFFI.userModel.userName.value})')),
+        //         leading: Icon(Icons.person),
+        //         onPressed: (context) {
+        //           if (gFFI.userModel.userName.value.isEmpty) {
+        //             loginDialog();
+        //           } else {
+        //             logOutConfirmDialog();
+        //           }
+        //         },
+        //       ),
+        //     ],
+        //   ),
         SettingsSection(title: Text(translate("Settings")), tiles: [
-          if (!disabledSettings && !_hideNetwork && !_hideServerBtn)
-            SettingsTile(
-                title: Text(translate('ID/Relay Server')),
-                leading: Icon(Icons.cloud),
-                onPressed: (context) {
-                  showServerSettings(gFFI.dialogManager);
-                }),
-          if (!isIOS && !_hideNetwork && !_hideProxy)
-            SettingsTile(
-                title: Text(translate('Socks5/Http(s) Proxy')),
-                leading: Icon(Icons.network_ping),
-                onPressed: (context) {
-                  changeSocks5Proxy();
-                }),
-          SettingsTile(
-              title: Text(translate('Language')),
-              leading: Icon(Icons.translate),
-              onPressed: (context) {
-                showLanguageSettings(gFFI.dialogManager);
-              }),
-          SettingsTile(
-            title: Text(translate(
-                Theme.of(context).brightness == Brightness.light
-                    ? 'Light Theme'
-                    : 'Dark Theme')),
-            leading: Icon(Theme.of(context).brightness == Brightness.light
-                ? Icons.dark_mode
-                : Icons.light_mode),
-            onPressed: (context) {
-              showThemeSettings(gFFI.dialogManager);
-            },
-          )
+          // if (!disabledSettings && !_hideNetwork && !_hideServerBtn)
+          //   SettingsTile(
+          //       title: Text(translate('ID/Relay Server')),
+          //       leading: Icon(Icons.cloud),
+          //       onPressed: (context) {
+          //         showServerSettings(gFFI.dialogManager);
+          //       }),
+          // if (!isIOS && !_hideNetwork && !_hideProxy)
+          //   SettingsTile(
+          //       title: Text(translate('Socks5/Http(s) Proxy')),
+          //       leading: Icon(Icons.network_ping),
+          //       onPressed: (context) {
+          //         changeSocks5Proxy();
+          //       }),
+          // SettingsTile(
+          //     title: Text(translate('Language')),
+          //     leading: Icon(Icons.translate),
+          //     onPressed: (context) {
+          //       showLanguageSettings(gFFI.dialogManager);
+          //     }),
+          // SettingsTile(
+          //   title: Text(translate(
+          //       Theme.of(context).brightness == Brightness.light
+          //           ? 'Light Theme'
+          //           : 'Dark Theme')),
+          //   leading: Icon(Theme.of(context).brightness == Brightness.light
+          //       ? Icons.dark_mode
+          //       : Icons.light_mode),
+          //   onPressed: (context) {
+          //     showThemeSettings(gFFI.dialogManager);
+          //   },
+          // )
         ]),
-        if (isAndroid)
-          SettingsSection(title: Text(translate('Hardware Codec')), tiles: [
-            SettingsTile.switchTile(
-              title: Text(translate('Enable hardware codec')),
-              initialValue: _enableHardwareCodec,
-              onToggle: isOptionFixed(kOptionEnableHwcodec)
-                  ? null
-                  : (v) async {
-                      await mainSetBoolOption(kOptionEnableHwcodec, v);
-                      final newValue =
-                          await mainGetBoolOption(kOptionEnableHwcodec);
-                      setState(() {
-                        _enableHardwareCodec = newValue;
-                      });
-                    },
-            ),
-          ]),
+        // if (isAndroid)
+        //   SettingsSection(title: Text(translate('Hardware Codec')), tiles: [
+        //     SettingsTile.switchTile(
+        //       title: Text(translate('Enable hardware codec')),
+        //       initialValue: _enableHardwareCodec,
+        //       onToggle: isOptionFixed(kOptionEnableHwcodec)
+        //           ? null
+        //           : (v) async {
+        //               await mainSetBoolOption(kOptionEnableHwcodec, v);
+        //               final newValue =
+        //                   await mainGetBoolOption(kOptionEnableHwcodec);
+        //               setState(() {
+        //                 _enableHardwareCodec = newValue;
+        //               });
+        //             },
+        //     ),
+        //   ]),
         if (isAndroid && !outgoingOnly)
           SettingsSection(
-            title: Text(translate("Recording")),
+            // title: Text(translate("Recording")),
             tiles: [
-              SettingsTile.switchTile(
-                title:
-                    Text(translate('Automatically record incoming sessions')),
-                leading: Icon(Icons.videocam),
-                description: Text(
-                    "${translate("Directory")}: ${bind.mainVideoSaveDirectory(root: false)}"),
-                initialValue: _autoRecordIncomingSession,
-                onToggle: isOptionFixed(kOptionAllowAutoRecordIncoming)
-                    ? null
-                    : (v) async {
-                        await bind.mainSetOption(
-                            key: kOptionAllowAutoRecordIncoming,
-                            value:
-                                bool2option(kOptionAllowAutoRecordIncoming, v));
-                        final newValue = option2bool(
-                            kOptionAllowAutoRecordIncoming,
-                            await bind.mainGetOption(
-                                key: kOptionAllowAutoRecordIncoming));
-                        setState(() {
-                          _autoRecordIncomingSession = newValue;
-                        });
-                      },
-              ),
+              // SettingsTile.switchTile(
+              //   title:
+              //       Text(translate('Automatically record incoming sessions')),
+              //   leading: Icon(Icons.videocam),
+              //   description: Text(
+              //       "${translate("Directory")}: ${bind.mainVideoSaveDirectory(root: false)}"),
+              //   initialValue: _autoRecordIncomingSession,
+              //   onToggle: isOptionFixed(kOptionAllowAutoRecordIncoming)
+              //       ? null
+              //       : (v) async {
+              //           await bind.mainSetOption(
+              //               key: kOptionAllowAutoRecordIncoming,
+              //               value:
+              //                   bool2option(kOptionAllowAutoRecordIncoming, v));
+              //           final newValue = option2bool(
+              //               kOptionAllowAutoRecordIncoming,
+              //               await bind.mainGetOption(
+              //                   key: kOptionAllowAutoRecordIncoming));
+              //           setState(() {
+              //             _autoRecordIncomingSession = newValue;
+              //           });
+              //         },
+              // ),
             ],
           ),
         if (isAndroid &&
             !disabledSettings &&
             !outgoingOnly &&
             !hideSecuritySettings)
-          SettingsSection(
-            title: Text(translate("Share Screen")),
-            tiles: shareScreenTiles,
-          ),
+          // SettingsSection(
+          //   title: Text(translate("Share Screen")),
+          //   tiles: shareScreenTiles,
+          // ),
         if (!bind.isIncomingOnly()) defaultDisplaySection(),
         if (isAndroid &&
             !disabledSettings &&
