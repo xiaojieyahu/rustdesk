@@ -10,7 +10,7 @@ This file contains the declaration of all the localizable strings.
 	<!-- General strings -->
 	<String Id="DowngradeError" Value="A newer version of [ProductName] is already installed." />
 
-	<String Id="AR_Comment" Value="RustDesk" />
+	<String Id="AR_Comment" Value="" />
 
 	<String Id="F_App" Value="RustDesk" />
 	<String Id="F_App_Desc" Value="RustDesk - Main programs installations." />

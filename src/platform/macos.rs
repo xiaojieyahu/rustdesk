@@ -211,7 +211,7 @@ pub fn is_installed_daemon(prompt: bool) -> bool {
 
 fn correct_app_name(s: &str) -> String {
     let s = s.replace("rustdesk", &crate::get_app_name().to_lowercase());
-    let s = s.replace("RustDesk", &crate::get_app_name());
+    let s = s.replace("", &crate::get_app_name());
     s
 }
 
