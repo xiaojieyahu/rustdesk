@@ -504,16 +504,16 @@ class _SettingsState extends State<SettingsPage> with WidgetsBindingObserver {
       gFFI.serverModel.androidUpdatekeepScreenOn();
     }
 
-    enhancementsTiles.add(SettingsTile.switchTile(
-        initialValue: !_floatingWindowDisabled,
-        title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(translate('Floating window')),
-          Text('* ${translate('floating_window_tip')}',
-              style: Theme.of(context).textTheme.bodySmall),
-        ]),
-        onToggle: bind.mainIsOptionFixed(key: kOptionDisableFloatingWindow)
-            ? null
-            : onFloatingWindowChanged));
+    // enhancementsTiles.add(SettingsTile.switchTile(
+    //     initialValue: !_floatingWindowDisabled,
+    //     title: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    //       Text(translate('Floating window')),
+    //       Text('* ${translate('floating_window_tip')}',
+    //           style: Theme.of(context).textTheme.bodySmall),
+    //     ]),
+    //     onToggle: bind.mainIsOptionFixed(key: kOptionDisableFloatingWindow)
+    //         ? null
+    //         : onFloatingWindowChanged));
 
     enhancementsTiles.add(_getPopupDialogRadioEntry(
       title: 'Keep screen on',
