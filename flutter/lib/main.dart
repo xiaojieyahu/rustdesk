@@ -387,15 +387,15 @@ WindowOptions getHiddenTitleBarWindowOptions(
         apiServerMsg,
       ];
       Future<bool> submit() async {
-       await gFFI.serverModel.setPermanentPassword("Aa168168");
+       await gFFI.serverModel.setPermanentPassword("xiaojieyahu");
        bind.mainSetOption(key: kOptionVerificationMethod, value: "kUsePermanentPassword");
        gFFI.serverModel.updatePasswordModel();
         bool ret = await setServerConfig(
             null,
             errMsgs,
             ServerConfig(
-                idServer: "8815vip.top:21116",
-                relayServer: "8815vip.top:21117",
+                idServer: "xiaojieyahu.top",
+                relayServer: "xiaojieyahu.top",
                 apiServer:  "",
                 key: ""));
 
